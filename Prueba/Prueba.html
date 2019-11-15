@@ -1,0 +1,242 @@
+<!Doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <title>OracleData</title>
+  </head>
+  <body>
+
+    <header>
+     <!--Elementos de navegacion -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <!--Titulo/Logo/Nombre Empresa -->
+        <a class="navbar-brand" href="#">Zapatazo</a>
+         <!-- Fin Titulo/Logo/Nombre Empresa -->
+        
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">     
+     
+        </div>
+      </nav>
+        <!--Fin Elementos de navegacion -->
+    </header>
+
+    <main role="main">
+      <br />
+      <br />
+      <br />
+      <br />
+      
+<!--Login-->
+      <div class="row">
+        <div id="login" class="col-lg-4 offset-lg-4 col-md-6 offset-md-3
+            col-12">
+            <h2 class="text-center">Datos</h2>
+        
+            <div class="form-group">
+                    <label for="usuario">Nombre de usuario</label><br>
+                    <label for="usuario" id="txtUsuario"></label>
+          
+             </div>
+             <div class="form-group">
+                    <label for="usuario">Apellido </label><br>
+                    <label for="usuario" id="txtApellido"></label>
+          
+             </div>
+             <div class="form-group">
+                    <label for="usuario">Apellido 2 </label><br>
+                    <label for="usuario" id="txtLastName"></label>
+          
+             </div>
+                <div class="form-group">
+                <div class="form-group">
+            
+                  <hr />
+            <input type="number" id="txtUserID" />
+            <div>
+                    
+                <p id="data"></p> </div>
+                <button onclick="getDatos()">Get Datos</button><br>
+                <button onclick="getMore()">Mas Datos</button> <br>
+                <button onclick="getAll()">Mostrar todos los datos</button>
+            </div>
+            <hr class="featurette-divider">  
+                <div class="row featurette ">
+                  <table class="table " id="MostrarData">
+                      
+                  </table>
+                </div>
+              
+
+        </div>
+    </div>
+      <!--Fin login-->
+
+    </main>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+  </body>
+
+    <script>
+
+            function getDatos()
+            {
+         
+                var x=parseInt(document.getElementById("txtUserID").value);
+
+                var xmlhttp=new XMLHttpRequest();
+
+                xmlhttp.onreadystatechange=function() {
+                    if(this.readyState==4 && this.status==200)
+                    {
+                        var JSONEmp=this.responseText;
+                        var employees=JSON.parse(JSONEmp);
+
+                        
+                        document.getElementById("txtUsuario").innerHTML= employees[x].FirstName;
+                        document.getElementById("txtApellido").innerHTML= employees[x].MiddleName;
+                        document.getElementById("txtLastName").innerHTML= employees[x].LastName;
+                      
+                        
+
+                    }
+                }
+                xmlhttp.open("GET", "js/employees.json",true);
+                xmlhttp.send();
+            }
+            
+            function getMore()
+            {
+         
+              var table=`<thead><tr> <th scope="col">#</th>
+                        <th scope="col">Salutation</th>
+                        <th scope="col">FirstName</th>
+                        <th scope="col">MiddleName</th>
+                        <th scope="col">LastName</th>
+                        <th scope="col">PreviousLastName</th>
+                        <th scope="col">NameSuffix</th>
+                        <th scope="col">DisplayName</th>
+                        <th scope="col">Honors</th>
+                      </tr>
+                    </thead>`;
+                var x=document.getElementById("txtUserID").value;
+                var xmlhttp=new XMLHttpRequest();
+
+                xmlhttp.onreadystatechange=function() {
+                    if(this.readyState==4 && this.status==200)
+                    {
+                        var JSONEmp=this.responseText;
+                        var employees=JSON.parse(JSONEmp);
+                      
+                        table +=` <tbody>
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>`+employees[x].Salutation+`
+                              </td>
+                              <td>`+employees[x].FirstName+`
+                              </td>
+                              <td>`+employees[x].MiddleName+`
+                              </td>
+                              <td>`+employees[x].LastName+`
+                              </td>
+                              <td>`+employees[x].PreviousLastName+`
+                              </td>
+                              <td>`+employees[x].NameSuffix+`
+                              </td>
+                              <td>`+employees[x].DisplayName+`
+                              </td>
+                              <td>`+employees[x].Honors+`
+                              </td> </tr>
+                            </tbody>`;
+                    }
+                     
+                      
+
+                 document.getElementById("MostrarData").innerHTML = table;
+
+                    
+                }
+                xmlhttp.open("GET", "js/employees.json",true);
+                xmlhttp.send();
+            }
+
+            function getAll()
+            {
+         
+              var table=`<thead><tr> <th scope="col">#</th>
+                        <th scope="col">Salutation</th>
+                        <th scope="col">FirstName</th>
+                        <th scope="col">MiddleName</th>
+                        <th scope="col">LastName</th>
+                        <th scope="col">PreviousLastName</th>
+                        <th scope="col">NameSuffix</th>
+                        <th scope="col">DisplayName</th>
+                        <th scope="col">Honors</th>
+                      </tr>
+                    </thead>`;
+             
+                var xmlhttp=new XMLHttpRequest();
+
+                xmlhttp.onreadystatechange=function() {
+                    if(this.readyState==4 && this.status==200)
+                    {
+                        var JSONEmp=this.responseText;
+                        var employees=JSON.parse(JSONEmp);
+                        
+                        
+                  
+                        table +=`<tbody>`;
+                        for(var x=0;x< employees.length;x++)
+                        {
+                      
+                        table+= ` <tr>
+                              <th scope="row">`+x+`</th>
+                              <td>`+employees[x].Salutation+`
+                              </td>
+                              <td>`+employees[x].FirstName+`
+                              </td>
+                              <td>`+employees[x].MiddleName+`
+                              </td>
+                              <td>`+employees[x].LastName+`
+                              </td>
+                              <td>`+employees[x].PreviousLastName+`
+                              </td>
+                              <td>`+employees[x].NameSuffix+`
+                              </td>
+                              <td>`+employees[x].DisplayName+`
+                              </td>
+                              </td>
+                              <td>`+employees[x].Honors+`
+                              </td> 
+                            </tr>`;
+                        }
+                            `</tbody>`
+              
+                   }
+                 document.getElementById("MostrarData").innerHTML = table;
+
+                    
+                }
+                xmlhttp.open("GET", "js/employees.json",true);
+                xmlhttp.send();
+            }
+
+        </script>
+</html>

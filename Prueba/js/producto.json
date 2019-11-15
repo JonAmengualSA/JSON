@@ -1,0 +1,3 @@
+[{"nombre":"camiseta","precio":3.45,"color":"rojo"},
+{"nombre":"pantalon","precio":9.99,"colo":"azul"},
+{"nombre":"zapato","precio":39.50,"colo":"negro","talla":"M"}]
