@@ -1,4 +1,4 @@
-<!Doctype html>
+!Doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -130,10 +130,10 @@
                         <th scope="col">FirstName</th>
                         <th scope="col">MiddleName</th>
                         <th scope="col">LastName</th>
-                        <th scope="col">PreviousLastName</th>
+                        <th scope="col">Honors</th>
                         <th scope="col">NameSuffix</th>
                         <th scope="col">DisplayName</th>
-                        <th scope="col">Honors</th>
+                        <th scope="col">Cara</th>
                       </tr>
                     </thead>`;
                 var x=document.getElementById("txtUserID").value;
@@ -156,13 +156,13 @@
                               </td>
                               <td>`+employees[x].LastName+`
                               </td>
-                              <td>`+employees[x].PreviousLastName+`
+                              <td>`+employees[x].Honors+`
                               </td>
                               <td>`+employees[x].NameSuffix+`
                               </td>
                               <td>`+employees[x].DisplayName+`
                               </td>
-                              <td>`+employees[x].Honors+`
+                              <td><img  class="img-fluid mx-auto d-block rounded" src=`+employees[x].Cara+`/>
                               </td> </tr>
                             </tbody>`;
                     }
@@ -185,10 +185,10 @@
                         <th scope="col">FirstName</th>
                         <th scope="col">MiddleName</th>
                         <th scope="col">LastName</th>
-                        <th scope="col">PreviousLastName</th>
+                        <th scope="col">Honors</th>
                         <th scope="col">NameSuffix</th>
                         <th scope="col">DisplayName</th>
-                        <th scope="col">Honors</th>
+                        <th scope="col">Cara</th>
                       </tr>
                     </thead>`;
              
@@ -216,14 +216,14 @@
                               </td>
                               <td>`+employees[x].LastName+`
                               </td>
-                              <td>`+employees[x].PreviousLastName+`
+                              <td>`+employees[x].Honors+`
                               </td>
                               <td>`+employees[x].NameSuffix+`
                               </td>
                               <td>`+employees[x].DisplayName+`
                               </td>
                               </td>
-                              <td>`+employees[x].Honors+`
+                              <td><img  class="img-fluid mx-auto d-block rounded" src=`+employees[x].Cara+`/>
                               </td> 
                             </tr>`;
                         }
