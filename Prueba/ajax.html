@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+    <html>
+    <body>
+            <h1>Introduce datos</h1>
+            <input type="date" id="txtUserID" />
+            <div id="data"></div>
+            <button onclick="getDatos()">Get Datos</button>
+            <hr class="featurette-divider">  
+            <div class="row featurette ">
+              <table class="table " id="MostrarData">
+                  
+              </table>
+            </div>
+
+
+    </body>
+    <script>
+        var table
+            function getDatos()
+            {
+                var table=`<thead><tr> <th scope="col">#</th>
+                        <th scope="col">Rates</th>
+                       
+                      </tr>
+                    </thead>`;
+                var xmlhttp=new XMLHttpRequest();
+                var x=document.getElementById("txtUserID").value;
+                xmlhttp.onreadystatechange=function() {
+                    if(this.readyState==4 && this.status==200)
+                    {   
+                        var JSONDivisa=this.responseText;
+                       var divia=JSON.parse(JSONDivisa);
+                       var divisas=(JSON.stringify(divia.rates));
+                       var finalDivisas=JSON.parse(divisas);
+                       table +=` <tbody>`;
+                        
+                        for(i in finalDivisas)
+                        {
+                            table+=`<tr>
+                                     <th scope="row">`+i+`</th>
+                                     <td>`+finalDivisas[i]+`</td> </tr>`;
+                        }
+        
+                   
+                        table +=` </tbody>`;
+                
+                       
+                        document.getElementById("MostrarData").innerHTML= table;
+                       console.log(finalDivisas);
+                      
+                        
+        
+                    }
+                }
+                xmlhttp.open("GET", "https://api.exchangeratesapi.io/"+x+"",true);
+                xmlhttp.send();
+        
+        
+            }
+      
+            
+        </script>
+</html>
+<!--
+    {"rates":
+        {"CAD":1.4608,
+        "HKD":8.6361,
+        "ISK":135.9,
+        "PHP":55.849,
+        "DKK":7.4723,
+        "HUF":334.8,
+        "CZK":25.583,
+        "AUD":1.6221,
+        "RON":4.7686,
+        "SEK":10.6518,
+        "IDR":15528.15,
+        "INR":79.163,
+        "BRL":4.6296,
+        "RUB":70.3938,
+        "HRK":7.438,
+        "JPY":119.95,
+        "THB":33.35,
+        "CHF":1.0924,
+        "SGD":1.5021,
+        "PLN":4.2785,"BGN":1.9558,"TRY":6.3433,"CNY":7.7343,"NOK":10.0345,"NZD":1.7255,"ZAR":16.2494,"USD":1.1034,"MXN":21.2194,"ILS":3.8352,"GBP":0.8566,"KRW":1285.34,"MYR":4.5817},
+    "base":"EUR",
+    "date":"2019-11-15"}
+-->
